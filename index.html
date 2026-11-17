@@ -1,157 +1,267 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-radius="soft">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Química General · Guía para el recuperatorio (2º y 3º parcial)</title>
+<meta name="description" content="Guía de estudio de Química General (UTN-FRC) para el recuperatorio del 2º y 3º parcial: conceptos, diagramas, ejercicios resueltos y formulario.">
+<meta name="theme-color" content="#efe9e0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600&family=Rethink+Sans:wght@400..600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f7f6f2; --card:#ffffff; --ink:#1d2329; --muted:#5d6670; --line:#e3e0d8;
-  --p2:#2a5bd7; --p2s:#e8eefc; --p3:#d9661f; --p3s:#fdeee3;
-  --ok:#1f8a5b; --oks:#e3f4ec; --warn:#b42318; --warns:#fde8e6; --tip:#7a5af8; --tips:#efeafe;
-  --endo:#d64545; --exo:#2f6fe0;
-  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  /* dealt by taste-skill: palette clay-pine, type zilla, radius soft */
+  --p-bg:#efe9e0; --p-surface:#e2d9cb; --p-ink:#22261f; --p-muted:#5a5c53;
+  --p-accent:#2e5b44; --p-accent-ink:#ffffff;
+  --font-display:"Zilla Slab",Georgia,serif;
+  --font-text:"Rethink Sans",system-ui,sans-serif;
+  --display-weight:400; --display-tracking:-0.018em; --display-tracking-xl:-0.024em;
+  --card:#f7f3ec; --line:rgba(34,38,31,.14); --line-2:rgba(34,38,31,.28);
+  --r-lg:20px; --r-md:12px; --r-sm:8px; --r-btn:8px;
+  --nav:72px; --gut:80px;
+  /* content colours (diagrams and states) */
+  --ok:#2e5b44; --oks:#dfe8e1; --warn:#9b2c1f; --warns:#f3e1da;
+  --endo:#b4432f; --exo:#2f5f8a; --muted:var(--p-muted); --ink:var(--p-ink);
+  --p2:var(--p-ink); --p3:var(--p-accent); --p2s:var(--p-surface); --p3s:var(--p-surface);
+  --ease:cubic-bezier(.2,.7,.2,1);
 }
+@media (max-width:640px){:root{--nav:56px;--gut:20px}}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:64px}
-body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.55 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-header.hero{background:#14213d;color:#fff;padding:34px 20px 26px}
-.wrap{max-width:980px;margin:0 auto;padding:0 18px}
-.hero h1{margin:0 0 6px;font-size:30px;letter-spacing:-.02em}
-.hero p{margin:0;color:#c9d3e6}
-.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.badge{font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.12)}
-nav.top{position:sticky;top:0;z-index:20;background:rgba(247,246,242,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
-nav.top .wrap{display:flex;gap:6px;overflow-x:auto;padding:9px 18px;scrollbar-width:thin}
-nav.top a{white-space:nowrap;text-decoration:none;font-size:13px;font-weight:600;color:var(--ink);padding:6px 11px;border-radius:8px;border:1px solid var(--line);background:#fff}
-nav.top a.p2{border-left:4px solid var(--p2)} nav.top a.p3{border-left:4px solid var(--p3)}
-nav.top a:hover{background:#f0eee8}
-section.topic{margin:28px 0;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px}
-section.topic>h2{margin:0 0 4px;font-size:23px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.tag{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:99px;text-transform:uppercase;letter-spacing:.04em}
-.tag.p2{background:var(--p2s);color:var(--p2)} .tag.p3{background:var(--p3s);color:var(--p3)} .tag.gen{background:#eee;color:#444}
-.lead{color:var(--muted);margin:2px 0 16px}
-h3{font-size:17px;margin:22px 0 8px}
-h4{font-size:15px;margin:14px 0 6px}
-p{margin:8px 0}
-ul,ol{margin:6px 0;padding-left:22px} li{margin:3px 0}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-@media (max-width:720px){.grid2,.grid3{grid-template-columns:1fr} section.topic{padding:18px 15px} .hero h1{font-size:24px}}
-.box{border-radius:12px;padding:12px 14px;margin:12px 0;border:1px solid}
-.box>b:first-child,.box .ttl{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
-.concept{background:#f4f6f9;border-color:#dfe5ee}
-.formula{background:#fffbea;border-color:#f1e2a6}
-.trap{background:var(--warns);border-color:#f6c5bf} .trap .ttl{color:var(--warn)}
-.how{background:var(--oks);border-color:#bfe3d0} .how .ttl{color:var(--ok)}
-.tip{background:var(--tips);border-color:#d9cffc} .tip .ttl{color:var(--tip)}
-.f{font-family:var(--mono);font-weight:600;font-size:14.5px;background:#fff;border:1px solid #eadfb5;border-radius:8px;padding:6px 10px;display:inline-block;margin:3px 4px 3px 0}
-code,.m{font-family:var(--mono);font-size:.93em}
-table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14.5px}
-th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
-th{background:#f3f1ec;font-weight:700}
-.tbl-wrap{overflow-x:auto}
-.flow{display:flex;align-items:stretch;flex-wrap:wrap;gap:6px;margin:12px 0}
-.flow .st{background:#fff;border:2px solid var(--p2);border-radius:10px;padding:8px 11px;font-weight:600;font-size:14px;display:flex;flex-direction:column;justify-content:center;max-width:220px}
-.flow.o .st{border-color:var(--p3)}
-.flow .st small{font-weight:500;color:var(--muted);font-size:12.5px}
-.flow .ar{display:flex;align-items:center;font-size:22px;color:#8a8f96;font-weight:700}
+html,body{margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav) + 16px)}
+body{background:var(--p-bg);color:var(--p-ink);font:400 16.5px/1.65 var(--font-text);-webkit-font-smoothing:antialiased;padding-top:var(--nav);font-variant-numeric:tabular-nums}
+a{color:var(--p-accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--gut)}
+.muted{color:var(--p-muted)}
+.skip-link{position:absolute;left:-9999px;top:8px;background:var(--p-ink);color:#fff;padding:8px 12px;border-radius:var(--r-sm);z-index:30}
+.skip-link:focus{left:var(--gut)}
+:focus-visible{outline:2px solid var(--p-accent);outline-offset:2px}
+
+/* ---------- header ---------- */
+header.nav{position:fixed;top:0;left:0;right:0;height:var(--nav);background:var(--p-bg);border-bottom:1px solid var(--line);z-index:20}
+.nav-in{max-width:1180px;margin:0 auto;padding:0 var(--gut);height:100%;display:flex;align-items:center;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--p-ink);flex:none}
+.mark{width:32px;height:32px;border-radius:var(--r-sm);background:var(--p-ink);color:var(--p-bg);display:flex;align-items:center;justify-content:center;font:600 18px var(--font-display)}
+.logo-t{font:var(--display-weight) 20px var(--font-display);letter-spacing:-.01em}
+.here{font-size:14px;color:var(--p-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1 1 auto}
+.links{display:flex;align-items:center;gap:4px;margin-left:auto}
+.nl{position:relative;font:500 15px var(--font-text);color:var(--p-ink);text-decoration:none;background:none;border:none;padding:10px 12px;border-radius:var(--r-sm);cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.nl::after{content:"";position:absolute;left:12px;right:12px;bottom:4px;height:2px;background:var(--p-ink);transform:scaleX(0);transform-origin:left;transition:transform .25s var(--ease)}
+.nl:hover::after,.nl[aria-current="true"]::after{transform:scaleX(1)}
+.nl-menu[aria-expanded="true"] svg{transform:rotate(180deg)}
+.nl svg{transition:transform .2s}
+.nav-act{flex:none}
+.menu-btn{display:none}
+.mega{position:absolute;top:var(--nav);left:0;right:0;background:var(--p-bg);border-bottom:1px solid var(--line)}
+.mega-in{max-width:1180px;margin:0 auto;padding:28px var(--gut) 32px;display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.mp-t{margin:0 0 10px;font-size:13px;font-weight:500;color:var(--p-muted)}
+.mp-col a{display:flex;align-items:center;gap:12px;min-height:44px;padding:6px 10px;border-radius:var(--r-sm);text-decoration:none;color:var(--p-ink);font-size:16px;transition:background .15s}
+.mp-col a:hover{background:var(--card)}
+.mp-col a .n{width:28px;height:28px;flex:none;border-radius:6px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font:500 14px var(--font-display);color:var(--p-muted)}
+.mp-col a[aria-current="true"]{background:var(--card);font-weight:500}
+.mp-col a[aria-current="true"] .n{background:var(--p-ink);color:var(--p-bg);border-color:var(--p-ink)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 24px;border-radius:var(--r-btn);font:500 16px var(--font-text);text-decoration:none;border:1px solid var(--p-ink);transition:transform .15s var(--ease),background .2s,color .2s;white-space:nowrap}
+.btn:hover{transform:translateY(-1px)} .btn:active{transform:translateY(1px) scale(.98)}
+.btn--primary{background:var(--p-accent);border-color:var(--p-accent);color:var(--p-accent-ink)}
+.btn--primary:hover{background:#244a37;border-color:#244a37}
+.btn--secondary{background:transparent;color:var(--p-ink)}
+.btn--secondary:hover{background:var(--p-ink);color:var(--p-bg)}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ---------- hero ---------- */
+.hero{padding:96px 0 72px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:13px;font-weight:500;color:var(--p-muted);margin:0 0 20px}
+.hero h1{font:var(--display-weight) clamp(38px,4.4vw + 8px,72px)/1.04 var(--font-display);letter-spacing:var(--display-tracking-xl);margin:0 0 24px;max-width:15ch}
+.hero .lead{font-size:20px;line-height:1.55;max-width:58ch;margin:0 0 16px;color:var(--p-ink)}
+.fact{font-size:14px;color:var(--p-muted);margin:0 0 32px}
+[data-enter]>.wrap>*{animation:enter .7s var(--ease) both}
+[data-enter]>.wrap>*:nth-child(2){animation-delay:.06s}
+[data-enter]>.wrap>*:nth-child(3){animation-delay:.12s}
+[data-enter]>.wrap>*:nth-child(4){animation-delay:.18s}
+[data-enter]>.wrap>*:nth-child(5){animation-delay:.24s}
+@keyframes enter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* ---------- topic map ---------- */
+.map{padding:96px 0 72px;border-bottom:1px solid var(--line)}
+h2,.map h2{font:var(--display-weight) clamp(30px,1.9vw + 22px,48px)/1.1 var(--font-display);letter-spacing:var(--display-tracking);margin:0 0 12px}
+.map h2{margin-bottom:48px}
+.grp{margin-bottom:40px}
+.grp-t{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:500;margin:0 0 16px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--p-ink)} .dot3{background:var(--p-accent)} .dotr{background:transparent;border:2px solid var(--p-ink)}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tcard{display:flex;flex-direction:column;gap:6px;padding:20px 22px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);text-decoration:none;color:var(--p-ink);transition:transform .2s var(--ease),border-color .2s,background .2s;min-height:150px}
+.tcard:hover{transform:translateY(-2px);border-color:var(--line-2);background:#faf7f1}
+.tc-n{font:var(--display-weight) 15px var(--font-display);color:var(--p-muted)}
+.tc-t{font:var(--display-weight) 24px/1.15 var(--font-display);letter-spacing:-.01em}
+.tc-d{font-size:16px;line-height:1.5;color:var(--p-ink)}
+.tc-p{margin-top:auto;padding-top:8px;font-size:13px;font-weight:500;color:var(--p-muted)}
+@media (max-width:1000px){.tgrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.tgrid{grid-template-columns:1fr}.tcard{min-height:0}}
+
+/* ---------- topic sections ---------- */
+.content{padding-bottom:48px}
+section.topic{padding:96px 0 64px;border-bottom:1px solid var(--line);max-width:900px}
+section.topic>h2{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.tag{font:500 13px var(--font-text);padding:4px 10px;border-radius:99px;background:var(--p-surface);color:var(--p-ink);letter-spacing:0;text-transform:none;position:relative;top:-6px}
+.tag.t3{background:var(--oks);color:var(--p-accent)}
+.lead{color:var(--p-muted);font-size:18px;line-height:1.55;margin:4px 0 32px;max-width:62ch}
+h3{font:var(--display-weight) 26px/1.2 var(--font-display);letter-spacing:-.01em;margin:48px 0 14px}
+h4{font:500 17px var(--font-text);margin:12px 0 6px}
+p{margin:10px 0} ul,ol{margin:8px 0;padding-left:22px} li{margin:4px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:720px){.grid2,.grid3{grid-template-columns:1fr}}
+
+/* one card recipe for every box */
+.box,.card,.ex,details.sol,.svgbox{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md)}
+.box{padding:16px 18px;margin:16px 0}
+.box .ttl,.box>b:first-child{display:block;font:500 13px var(--font-text);letter-spacing:0;text-transform:none;color:var(--p-muted);margin-bottom:6px}
+.box.trap .ttl{color:var(--warn)} .box.how .ttl{color:var(--p-accent)}
+.box.formula{background:#fbf8f2}
+.box.trap{background:#f8ece6;border-color:rgba(155,44,31,.22)}
+.card{padding:16px 18px}
+.card h4{margin-top:0;font-size:17px}
+.f{font:500 15px var(--font-text);font-variant-numeric:tabular-nums;background:var(--p-bg);border:1px solid var(--line);border-radius:6px;padding:5px 10px;display:inline-block;margin:3px 4px 3px 0}
+code,.m{font-family:var(--font-text);font-variant-numeric:tabular-nums;font-weight:500}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:15.5px;background:var(--card);border-radius:var(--r-md);overflow:hidden}
+th,td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--p-surface);font-weight:500}
+tr:last-child td{border-bottom:none}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-md);margin:14px 0}
+.tbl-wrap table{margin:0;border-radius:0}
+.flow{display:flex;align-items:stretch;flex-wrap:wrap;gap:8px;margin:16px 0}
+.flow .st{background:var(--card);border:1px solid var(--line-2);border-radius:var(--r-sm);padding:9px 13px;font-weight:500;font-size:15px;display:flex;flex-direction:column;justify-content:center;max-width:230px}
+.flow .st small{font-weight:400;color:var(--p-muted);font-size:14px}
+.flow .ar{display:flex;align-items:center;font-size:20px;color:var(--p-muted)}
 .steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
-.steps>li{counter-increment:s;position:relative;padding:6px 0 6px 38px}
-.steps>li::before{content:counter(s);position:absolute;left:0;top:5px;width:26px;height:26px;border-radius:50%;background:var(--ok);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
-details.sol{border:1.5px dashed #b9c3cf;border-radius:12px;padding:10px 14px;margin:12px 0;background:#fcfcfb}
-details.sol>summary{cursor:pointer;font-weight:700;color:var(--p2);list-style:none}
-details.sol>summary::before{content:"▶  ";font-size:11px}
-details.sol[open]>summary::before{content:"▼  "}
-.ex{background:#fff;border:1px solid var(--line);border-left:5px solid var(--p2);border-radius:10px;padding:12px 14px;margin:14px 0}
-.ex.o{border-left-color:var(--p3)}
-.ex .q{font-weight:600}
-.pts{font-size:12px;font-weight:700;color:var(--muted)}
-.ans{font-weight:700;color:var(--ok)}
-.svgbox{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;margin:12px 0;text-align:center}
+.steps>li{counter-increment:s;position:relative;padding:6px 0 6px 40px}
+.steps>li::before{content:counter(s);position:absolute;left:0;top:5px;width:28px;height:28px;border-radius:50%;background:var(--p-accent);color:#fff;font:500 14px var(--font-display);display:flex;align-items:center;justify-content:center}
+.ex{padding:18px 20px;margin:18px 0}
+.ex .q{font-weight:500;margin-top:6px}
+.pts{font-size:13px;font-weight:500;color:var(--p-muted)}
+.ans{font-weight:600;color:var(--p-accent)}
+details.sol{background:var(--p-bg);padding:12px 16px;margin:14px 0 2px}
+details.sol>summary{cursor:pointer;font-weight:500;color:var(--p-accent);list-style:none;display:flex;align-items:center;gap:8px;min-height:28px}
+details.sol>summary::-webkit-details-marker{display:none}
+details.sol>summary::before{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s}
+details.sol[open]>summary::before{transform:rotate(45deg)}
+details.sol table{background:var(--card)}
+.svgbox{padding:14px;margin:18px 0;text-align:center}
 .svgbox svg{max-width:100%;height:auto}
-.svgbox .cap{font-size:12.5px;color:var(--muted);margin-top:4px}
+.svgbox .cap{font-size:14px;color:var(--p-muted);margin-top:6px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
-.chip{padding:5px 10px;border-radius:99px;font-size:13.5px;font-weight:600;border:1px solid var(--line);background:#fff}
+.chip{padding:5px 11px;border-radius:99px;font-size:14px;font-weight:500;border:1px solid var(--line);background:var(--p-bg)}
 .up{color:var(--endo)} .dn{color:var(--exo)}
-.big-arrow{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin:12px 0}
-.big-arrow .mid{font-size:30px;color:#999}
-.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
-.card h4{margin-top:0}
-.phbar{height:30px;border-radius:8px;background:linear-gradient(90deg,#d7263d 0%,#f46036 18%,#f2c14e 38%,#5fad56 50%,#2e86ab 66%,#4b3f72 85%,#2a1e5c 100%);position:relative;margin:28px 0 30px}
-.phbar span{position:absolute;top:34px;font-size:12px;font-family:var(--mono);transform:translateX(-50%)}
-.phbar i{position:absolute;top:-24px;font-style:normal;font-size:12px;font-weight:700;transform:translateX(-50%);white-space:nowrap}
-.ladder{display:flex;flex-direction:column;gap:4px;margin:10px 0}
-.rung{display:grid;grid-template-columns:150px 90px 1fr;align-items:center;gap:8px;padding:6px 10px;border-radius:8px;background:#f4f6f9;font-size:14px}
-.rung.fe{background:#ffe9a8;font-weight:700}
+.big-arrow{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;margin:14px 0}
+.big-arrow .mid{font-size:26px;color:var(--p-muted)}
+@media (max-width:720px){.big-arrow{grid-template-columns:1fr}.big-arrow .mid{display:none}}
+.phbar{height:30px;border-radius:var(--r-sm);background:linear-gradient(90deg,#c0392b 0%,#e67e22 18%,#e5c25b 38%,#5c9a52 50%,#2f7f8f 66%,#1d4e89 85%,#14365e 100%);position:relative;margin:30px 0 34px}
+.phbar span{position:absolute;top:36px;font-size:13px;transform:translateX(-50%)}
+.phbar i{position:absolute;top:-24px;font-style:normal;font-size:13px;font-weight:500;transform:translateX(-50%);white-space:nowrap}
+.ladder{display:flex;flex-direction:column;gap:4px;margin:12px 0}
+.rung{display:grid;grid-template-columns:120px 80px 1fr;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--r-sm);background:var(--card);border:1px solid var(--line);font-size:15px}
+.rung.fe{background:#efe2bd;font-weight:500}
 .rung.sac{background:var(--oks)}
-.rung.no{background:var(--warns)}
-.mnemo{font-size:17px;font-weight:800;letter-spacing:-.01em}
-.kbd{display:inline-block;background:#14213d;color:#fff;border-radius:6px;padding:1px 7px;font-family:var(--mono);font-size:13px}
-.plan td:first-child{white-space:nowrap;font-weight:700}
-footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
-.vf td:nth-child(2){font-weight:800;text-align:center;width:46px}
+.rung.no{background:#f4e6e0}
+@media (max-width:640px){.rung{grid-template-columns:90px 70px 1fr;font-size:14px}}
+.mnemo{font:var(--display-weight) 22px var(--font-display)}
+.kbd{display:inline-block;background:var(--p-ink);color:var(--p-bg);border-radius:5px;padding:1px 7px;font-size:13px}
+.plan td:first-child{white-space:nowrap;font-weight:500}
+.vf td:nth-child(2){font-weight:600;text-align:center;width:48px}
 .vf .V{color:var(--ok)} .vf .F{color:var(--warn)}
 .formulario .card{break-inside:avoid}
-.formulario .f{font-size:13.5px}
-@media print{
-  body{background:#fff;font-size:12.5px}
-  nav.top{display:none}
-  header.hero{padding:18px 20px}
-  section.topic{border:none;padding:6px 0;margin:0;break-before:page}
-  section#inicio{break-before:auto}
-  details.sol{border-style:solid}
-  .ex,.box,.svgbox,.card,table,.rung{break-inside:avoid}
-  a{color:inherit;text-decoration:none}
-  .grid2{grid-template-columns:1fr 1fr !important}
-  .grid3{grid-template-columns:repeat(3,1fr) !important}
-  h3,h4{break-after:avoid}
+.formulario .f{font-size:14px}
+.pn{display:flex;justify-content:space-between;gap:12px;margin-top:48px}
+.pn a{flex:1;max-width:48%;text-decoration:none;color:var(--p-ink);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 18px;background:var(--card);transition:transform .2s var(--ease),border-color .2s}
+.pn a:hover{transform:translateY(-2px);border-color:var(--line-2)}
+.pn a small{display:block;color:var(--p-muted);font-size:13px;font-weight:500;margin-bottom:2px}
+.pn a span{font:var(--display-weight) 20px var(--font-display)}
+.pn a.nx{text-align:right;margin-left:auto}
+.foot{padding:40px 0 64px;color:var(--p-muted);font-size:14px}
+section.topic a:not(.btn){text-underline-offset:3px}
+
+/* ---------- small screens ---------- */
+@media (max-width:1000px){
+  .links,.nav-act,.here{display:none}
+  .menu-btn{display:flex;align-items:center;margin-left:auto;height:44px;padding:0 18px;border:1px solid var(--p-ink);border-radius:var(--r-btn);background:transparent;font:500 16px var(--font-text);color:var(--p-ink);cursor:pointer}
+  .menu-btn[aria-expanded="true"]{background:var(--p-ink);color:var(--p-bg)}
+  .mega{position:fixed;top:var(--nav);bottom:0;overflow-y:auto}
+  .mega-in{grid-template-columns:1fr;gap:20px;padding:16px var(--gut) 48px}
+  .mp-col a{min-height:56px;border-bottom:1px solid var(--line);border-radius:0;font-size:17px}
 }
+@media (max-width:640px){
+  .hero{padding:56px 0 48px} .map,section.topic{padding:64px 0 48px} .map h2{margin-bottom:32px}
+  .logo-t{font-size:18px}
+  .btn-row .btn{width:100%}
+  h3{font-size:22px;margin-top:36px}
+  body{font-size:16px}
+}
+
+/* ---------- print ---------- */
+@media print{
+  body{background:#fff;padding-top:0;font-size:12.5px}
+  header.nav,.pn,.map,.btn-row,.skip-link{display:none!important}
+  .hero{padding:10px 0 16px}
+  section.topic{padding:6px 0;border:none;break-before:page;max-width:none}
+  section#inicio{break-before:auto}
+  .ex,.box,.svgbox,.card,table,.rung,.tcard{break-inside:avoid}
+  h3,h4{break-after:avoid}
+  .grid2{grid-template-columns:1fr 1fr!important} .grid3{grid-template-columns:repeat(3,1fr)!important}
+  a{color:inherit;text-decoration:none}
+  [data-enter]>.wrap>*{animation:none}
+}
+
 </style>
 </head>
 <body>
-
-<header class="hero">
-  <div class="wrap">
-    <h1>Química General · Guía de recuperatorio</h1>
-    <p>2º y 3º parcial. Conceptos cortos, diagramas y el método para cada tipo de ejercicio que se repite en los simulacros. Pensada para Ing. Industrial sin mucha base de química.</p>
-    <div class="badges">
-      <span class="badge">🔵 2º parcial: estados de la materia, soluciones, termo, cinética</span>
-      <span class="badge">🟠 3º parcial: equilibrio, pH, Kps, redox, electroquímica</span>
-      <a class="badge" style="background:#fca311;color:#14213d;text-decoration:none" href="Guia_Quimica_Recuperatorio.pdf" download>⬇ Descargar PDF</a>
-    </div>
+<header class="nav">
+  <div class="nav-in">
+    <a class="skip-link" href="#top">Saltar al contenido</a>
+    <a class="logo" href="#top"><span class="mark">Q</span><span class="logo-t">Química · Recuperatorio</span></a>
+    <span class="here" id="here"></span>
+    <nav class="links" aria-label="Principal">
+      <button class="nl nl-menu" id="mbtn" aria-expanded="false" aria-controls="mega">Temas <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+      <a class="nl" href="#inicio" data-id="inicio">Plan</a>
+      <a class="nl" href="#vf" data-id="vf">V o F</a>
+      <a class="nl" href="#formulario" data-id="formulario">Formulario</a>
+    </nav>
+    <div class="nav-act"><a class="btn btn--primary" href="Guia_Quimica_Recuperatorio.pdf" download>Descargar PDF</a></div>
+    <button class="menu-btn" id="sbtn" aria-expanded="false" aria-controls="mega">Temas</button>
   </div>
+  <div class="mega" id="mega" hidden><div class="mega-in"><div class="mp-col"><p class="mp-t">2º parcial</p><a href="#fuerzas" data-id="fuerzas"><span class="n">1</span><span>Fuerzas y líquidos</span></a><a href="#solidos" data-id="solidos"><span class="n">2</span><span>Sólidos</span></a><a href="#gases" data-id="gases"><span class="n">3</span><span>Gases</span></a><a href="#soluciones" data-id="soluciones"><span class="n">4</span><span>Soluciones</span></a><a href="#termo" data-id="termo"><span class="n">5</span><span>Termoquímica</span></a><a href="#espontaneidad" data-id="espontaneidad"><span class="n">6</span><span>Espontaneidad</span></a><a href="#cinetica" data-id="cinetica"><span class="n">7</span><span>Cinética</span></a></div><div class="mp-col"><p class="mp-t">3º parcial</p><a href="#equilibrio" data-id="equilibrio"><span class="n">8</span><span>Equilibrio</span></a><a href="#ph" data-id="ph"><span class="n">9</span><span>pH</span></a><a href="#kps" data-id="kps"><span class="n">10</span><span>Kps</span></a><a href="#redox" data-id="redox"><span class="n">11</span><span>Redox</span></a><a href="#pilas" data-id="pilas"><span class="n">12</span><span>Pilas y electrólisis</span></a><a href="#corrosion" data-id="corrosion"><span class="n">13</span><span>Corrosión</span></a></div><div class="mp-col"><p class="mp-t">Repaso</p><a href="#inicio" data-id="inicio"><span class="n">·</span><span>Plan y qué se toma</span></a><a href="#vf" data-id="vf"><span class="n">·</span><span>Verdadero o falso</span></a><a href="#formulario" data-id="formulario"><span class="n">·</span><span>Formulario</span></a></div></div></div>
 </header>
 
-<nav class="top"><div class="wrap">
-  <a href="#inicio">Inicio y plan</a>
-  <a class="p2" href="#fuerzas">Fuerzas y líquidos</a>
-  <a class="p2" href="#solidos">Sólidos</a>
-  <a class="p2" href="#gases">Gases</a>
-  <a class="p2" href="#soluciones">Soluciones</a>
-  <a class="p2" href="#termo">Termoquímica</a>
-  <a class="p2" href="#espontaneidad">Espontaneidad</a>
-  <a class="p2" href="#cinetica">Cinética</a>
-  <a class="p3" href="#equilibrio">Equilibrio</a>
-  <a class="p3" href="#ph">pH</a>
-  <a class="p3" href="#kps">Kps</a>
-  <a class="p3" href="#redox">Redox</a>
-  <a class="p3" href="#pilas">Pilas y electrólisis</a>
-  <a class="p3" href="#corrosion">Corrosión</a>
-  <a href="#vf">V o F</a>
-  <a href="#formulario">Formulario</a>
-</div></nav>
+<main id="top">
+<section class="hero" data-enter>
+  <div class="wrap">
+    <p class="eyebrow">Química General · UTN-FRC · Ingeniería Industrial</p>
+    <h1>Guía para el recuperatorio del 2º y 3º parcial</h1>
+    <p class="lead">Conceptos cortos, diagramas y el método para cada ejercicio que se repite en los simulacros. Pensada para quien no tiene mucha base de química.</p>
+    <p class="fact">13 temas · 14 ejercicios de parcial resueltos · 24 V o F con justificación</p>
+    <div class="btn-row"><a class="btn btn--primary" href="#temas">Ver los temas</a><a class="btn btn--secondary" href="#inicio">Empezar por el plan</a></div>
+  </div>
+</section>
 
-<main class="wrap">
+<section class="map" id="temas">
+  <div class="wrap">
+    <h2>Los 13 temas. <span class="muted">Elegí uno o seguí el orden.</span></h2>
+    <div class="grp"><p class="grp-t"><span class="dot"></span>2º parcial <span class="muted">· estados de la materia, soluciones, termo y cinética</span></p><div class="tgrid"><a class="tcard" href="#fuerzas"><span class="tc-n">01</span><span class="tc-t">Fuerzas y líquidos</span><span class="tc-d">Qué fuerza tiene cada sustancia y cómo cambian la viscosidad, la presión de vapor y la ebullición.</span><span class="tc-p">En el parcial: 1 pt</span></a><a class="tcard" href="#solidos"><span class="tc-n">02</span><span class="tc-t">Sólidos</span><span class="tc-d">Los cuatro tipos de cristal y cómo elegir entre Al, Ge, SiC y KBr.</span><span class="tc-p">En el parcial: 1 pt</span></a><a class="tcard" href="#gases"><span class="tc-n">03</span><span class="tc-t">Gases</span><span class="tc-d">Combustión y mezcla de gases: moles, fracción molar y presión total.</span><span class="tc-p">En el parcial: 1,5 pts</span></a><a class="tcard" href="#soluciones"><span class="tc-n">04</span><span class="tc-t">Soluciones</span><span class="tc-d">% p/p, molalidad, molaridad y dilución con la tabla soluto/solvente/solución.</span><span class="tc-p">En el parcial: 2,5 pts</span></a><a class="tcard" href="#termo"><span class="tc-n">05</span><span class="tc-t">Termoquímica</span><span class="tc-d">Ley de Hess en cinco pasos y el calor para una masa dada.</span><span class="tc-p">En el parcial: 2,5 pts</span></a><a class="tcard" href="#espontaneidad"><span class="tc-n">06</span><span class="tc-t">Espontaneidad</span><span class="tc-d">Signo de ΔS, ΔG = ΔH − TΔS y las cuatro combinaciones.</span><span class="tc-p">Tomado en el recuperatorio 2023</span></a><a class="tcard" href="#cinetica"><span class="tc-n">07</span><span class="tc-t">Cinética</span><span class="tc-d">Leer un perfil energético: Ea, ΔH, catalizador y cómo acelerar.</span><span class="tc-p">En el parcial: 1,5 pts</span></a></div></div>
+    <div class="grp"><p class="grp-t"><span class="dot dot3"></span>3º parcial <span class="muted">· equilibrio, pH, redox y electroquímica</span></p><div class="tgrid"><a class="tcard" href="#equilibrio"><span class="tc-n">08</span><span class="tc-t">Equilibrio</span><span class="tc-d">Escribir Kc, calcular una concentración, Q vs K y Le Chatelier.</span><span class="tc-p">En el parcial: 2,5 pts</span></a><a class="tcard" href="#ph"><span class="tc-n">09</span><span class="tc-t">pH</span><span class="tc-d">pH de tres soluciones, ordenarlas y la escala logarítmica.</span><span class="tc-p">En el parcial: 1,5 pts</span></a><a class="tcard" href="#kps"><span class="tc-n">10</span><span class="tc-t">Kps</span><span class="tc-d">Solubilidad molar y cuándo precipita: Q vs Kps.</span><span class="tc-p">Aparece en V o F</span></a><a class="tcard" href="#redox"><span class="tc-n">11</span><span class="tc-t">Redox</span><span class="tc-d">Números de oxidación y el método ion-electrón paso a paso.</span><span class="tc-p">En el parcial: 2 pts</span></a><a class="tcard" href="#pilas"><span class="tc-n">12</span><span class="tc-t">Pilas y electrólisis</span><span class="tc-d">Ánodo, cátodo, E° de la pila, ΔG y la ley de Faraday.</span><span class="tc-p">En el parcial: 1 pt</span></a><a class="tcard" href="#corrosion"><span class="tc-n">13</span><span class="tc-t">Corrosión</span><span class="tc-d">Ánodo de sacrificio para proteger el hierro.</span><span class="tc-p">En el parcial: 1,5 pts</span></a></div></div>
+    <div class="grp"><p class="grp-t"><span class="dot dotr"></span>Repaso final</p>
+      <div class="tgrid"><a class="tcard" href="#inicio"><span class="tc-t">Plan y qué se toma</span><span class="tc-d">Qué entra en cada parcial y cómo llegar al miércoles.</span></a><a class="tcard" href="#vf"><span class="tc-t">Verdadero o falso</span><span class="tc-d">Todos los V o F de los simulacros con su justificación.</span></a><a class="tcard" href="#formulario"><span class="tc-t">Formulario</span><span class="tc-d">Todo en una página para repasar antes de entrar.</span></a></div></div>
+  </div>
+</section>
 
-<!-- ===================== INICIO ===================== -->
+<div class="wrap content">
 <section class="topic" id="inicio">
-  <h2>Cómo usar esta guía <span class="tag gen">Empezá acá</span></h2>
+  <h2>Plan y qué se toma <span class="tag">Empezá acá</span></h2>
   <p class="lead">Los parciales de esta cátedra repiten siempre los mismos tipos de ejercicio con distintos números. La forma más rápida de aprobar es dominar esos tipos.</p>
 
-  <h3>📋 Lo que se toma siempre (según los simulacros)</h3>
+  <h3>Lo que se toma siempre (según los simulacros)</h3>
   <div class="tbl-wrap"><table>
     <tr><th>Parcial</th><th>Tipo de ejercicio</th><th>Puntos</th><th>Sección</th></tr>
     <tr><td rowspan="6">🔵 2º</td><td>Ley de Hess: ΔH°f de un compuesto + calor para X gramos</td><td>2,5</td><td><a href="#termo">Termoquímica</a></td></tr>
@@ -169,7 +279,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
   </table></div>
   <div class="box trap"><span class="ttl">⚠ Regla de la cátedra</span>«Las respuestas sin justificar carecen de valor». Siempre escribí el <b>porqué</b> en una línea: la fórmula usada, la fuerza intermolecular o el signo que te lleva a la conclusión.</div>
 
-  <h3>🗓️ Plan para llegar al miércoles</h3>
+  <h3>Plan para llegar al miércoles</h3>
   <table class="plan">
     <tr><td>Lunes noche (1 h)</td><td>Leer «Fuerzas», «Sólidos», «Gases» y «Soluciones». Solo leer y mirar los diagramas.</td></tr>
     <tr><td>Martes mañana</td><td>Hacer los ejercicios resueltos del 2º parcial <b>sin mirar</b> y después comparar. Termoquímica (Hess) y Cinética.</td></tr>
@@ -178,7 +288,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
     <tr><td>Miércoles antes</td><td>Solo el <a href="#formulario">Formulario</a> y el <a href="#vf">banco de V o F</a>.</td></tr>
   </table>
 
-  <h3>🧰 Kit de supervivencia (lo que usás en todos lados)</h3>
+  <h3>Kit de supervivencia (lo que usás en todos lados)</h3>
   <div class="chips">
     <span class="f">mol = masa (g) / M (g/mol)</span>
     <span class="f">T(K) = °C + 273,15</span>
@@ -192,7 +302,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
 
 <!-- ===================== FUERZAS ===================== -->
 <section class="topic" id="fuerzas">
-  <h2>Fuerzas intermoleculares y líquidos <span class="tag p2">2º parcial</span></h2>
+  <h2>Fuerzas intermoleculares y líquidos <span class="tag">2º parcial</span></h2>
   <p class="lead">Explican por qué algo hierve a mayor o menor temperatura, por qué la miel es espesa o por qué el alcohol se evapora rápido.</p>
 
   <div class="grid2">
@@ -202,28 +312,28 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
 
   <h3>¿Qué fuerza tiene cada sustancia? Árbol de decisión</h3>
   <div class="svgbox">
-  <svg viewBox="0 0 720 370" xmlns="http://www.w3.org/2000/svg" font-family="Inter,sans-serif" font-size="13">
-    <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#7b8590"/></marker></defs>
-    <g stroke="#7b8590" stroke-width="1.8" fill="none" marker-end="url(#a1)">
+  <svg viewBox="0 0 720 370" xmlns="http://www.w3.org/2000/svg" font-family="Rethink Sans,sans-serif" font-size="13">
+    <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#8a877d"/></marker></defs>
+    <g stroke="#8a877d" stroke-width="1.8" fill="none" marker-end="url(#a1)">
       <path d="M330,52 L200,92"/><path d="M390,52 L520,92"/>
       <path d="M160,136 L100,184"/><path d="M220,136 L280,184"/>
       <path d="M500,136 L450,184"/><path d="M570,136 L615,184"/>
       <path d="M600,232 L530,280"/><path d="M640,232 L660,280"/>
     </g>
-    <g font-size="12" font-weight="700"><text x="240" y="66" fill="#1f8a5b">SÍ</text><text x="465" y="66" fill="#b42318">NO</text>
-    <text x="108" y="160" fill="#1f8a5b">SÍ</text><text x="262" y="160" fill="#b42318">NO</text>
-    <text x="452" y="160" fill="#b42318">NO</text><text x="600" y="160" fill="#1f8a5b">SÍ</text>
-    <text x="545" y="258" fill="#b42318">NO</text><text x="660" y="258" fill="#1f8a5b">SÍ</text></g>
-    <rect x="280" y="10" width="160" height="42" rx="10" fill="#14213d"/><text x="360" y="36" fill="#fff" text-anchor="middle" font-weight="700">¿Hay iones?</text>
-    <rect x="100" y="94" width="190" height="42" rx="10" fill="#e8eefc" stroke="#2a5bd7"/><text x="195" y="113" text-anchor="middle" font-weight="600">¿Hay también</text><text x="195" y="128" text-anchor="middle" font-weight="600">moléculas polares?</text>
-    <rect x="430" y="94" width="190" height="42" rx="10" fill="#e8eefc" stroke="#2a5bd7"/><text x="525" y="120" text-anchor="middle" font-weight="600">¿Hay moléculas polares?</text>
-    <rect x="20" y="186" width="160" height="50" rx="10" fill="#e3f4ec" stroke="#1f8a5b"/><text x="100" y="207" text-anchor="middle" font-weight="800">ION–DIPOLO</text><text x="100" y="225" text-anchor="middle" fill="#5d6670">KBr disuelto en agua</text>
-    <rect x="200" y="186" width="170" height="50" rx="10" fill="#e3f4ec" stroke="#1f8a5b"/><text x="285" y="207" text-anchor="middle" font-weight="800">ION–ION (iónico)</text><text x="285" y="225" text-anchor="middle" fill="#5d6670">NaCl, KBr sólido</text>
-    <rect x="380" y="186" width="160" height="50" rx="10" fill="#e3f4ec" stroke="#1f8a5b"/><text x="460" y="207" text-anchor="middle" font-weight="800">Solo LONDON</text><text x="460" y="225" text-anchor="middle" fill="#5d6670">CH₄, I₂, Ar, CO₂</text>
-    <rect x="555" y="186" width="160" height="46" rx="10" fill="#e8eefc" stroke="#2a5bd7"/><text x="635" y="205" text-anchor="middle" font-weight="600">¿H unido a</text><text x="635" y="222" text-anchor="middle" font-weight="600">N, O o F?</text>
-    <rect x="440" y="282" width="150" height="50" rx="10" fill="#e3f4ec" stroke="#1f8a5b"/><text x="515" y="303" text-anchor="middle" font-weight="800">DIPOLO–DIPOLO</text><text x="515" y="321" text-anchor="middle" fill="#5d6670">HCl, H₂S, SO₂</text>
-    <rect x="600" y="282" width="115" height="50" rx="10" fill="#e3f4ec" stroke="#1f8a5b"/><text x="657" y="303" text-anchor="middle" font-weight="800">PUENTE H</text><text x="657" y="321" text-anchor="middle" fill="#5d6670">H₂O, NH₃, HF</text>
-    <text x="20" y="360" fill="#5d6670" font-size="12.5">Las fuerzas de London (dispersión) están en TODAS las moléculas, además de las otras.</text>
+    <g font-size="12" font-weight="700"><text x="240" y="66" fill="#2e5b44">SÍ</text><text x="465" y="66" fill="#9b2c1f">NO</text>
+    <text x="108" y="160" fill="#2e5b44">SÍ</text><text x="262" y="160" fill="#9b2c1f">NO</text>
+    <text x="452" y="160" fill="#9b2c1f">NO</text><text x="600" y="160" fill="#2e5b44">SÍ</text>
+    <text x="545" y="258" fill="#9b2c1f">NO</text><text x="660" y="258" fill="#2e5b44">SÍ</text></g>
+    <rect x="280" y="10" width="160" height="42" rx="10" fill="#22261f"/><text x="360" y="36" fill="#fff" text-anchor="middle" font-weight="700">¿Hay iones?</text>
+    <rect x="100" y="94" width="190" height="42" rx="10" fill="#f7f3ec" stroke="#8a877d"/><text x="195" y="113" text-anchor="middle" font-weight="600">¿Hay también</text><text x="195" y="128" text-anchor="middle" font-weight="600">moléculas polares?</text>
+    <rect x="430" y="94" width="190" height="42" rx="10" fill="#f7f3ec" stroke="#8a877d"/><text x="525" y="120" text-anchor="middle" font-weight="600">¿Hay moléculas polares?</text>
+    <rect x="20" y="186" width="160" height="50" rx="10" fill="#dfe8e1" stroke="#2e5b44"/><text x="100" y="207" text-anchor="middle" font-weight="800">ION–DIPOLO</text><text x="100" y="225" text-anchor="middle" fill="#5a5c53">KBr disuelto en agua</text>
+    <rect x="200" y="186" width="170" height="50" rx="10" fill="#dfe8e1" stroke="#2e5b44"/><text x="285" y="207" text-anchor="middle" font-weight="800">ION–ION (iónico)</text><text x="285" y="225" text-anchor="middle" fill="#5a5c53">NaCl, KBr sólido</text>
+    <rect x="380" y="186" width="160" height="50" rx="10" fill="#dfe8e1" stroke="#2e5b44"/><text x="460" y="207" text-anchor="middle" font-weight="800">Solo LONDON</text><text x="460" y="225" text-anchor="middle" fill="#5a5c53">CH₄, I₂, Ar, CO₂</text>
+    <rect x="555" y="186" width="160" height="46" rx="10" fill="#f7f3ec" stroke="#8a877d"/><text x="635" y="205" text-anchor="middle" font-weight="600">¿H unido a</text><text x="635" y="222" text-anchor="middle" font-weight="600">N, O o F?</text>
+    <rect x="440" y="282" width="150" height="50" rx="10" fill="#dfe8e1" stroke="#2e5b44"/><text x="515" y="303" text-anchor="middle" font-weight="800">DIPOLO–DIPOLO</text><text x="515" y="321" text-anchor="middle" fill="#5a5c53">HCl, H₂S, SO₂</text>
+    <rect x="600" y="282" width="115" height="50" rx="10" fill="#dfe8e1" stroke="#2e5b44"/><text x="657" y="303" text-anchor="middle" font-weight="800">PUENTE H</text><text x="657" y="321" text-anchor="middle" fill="#5a5c53">H₂O, NH₃, HF</text>
+    <text x="20" y="360" fill="#5a5c53" font-size="12.5">Las fuerzas de London (dispersión) están en TODAS las moléculas, además de las otras.</text>
   </svg>
   </div>
 
@@ -253,31 +363,31 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
 
   <h3>Cambios de estado: ¿absorben o liberan calor?</h3>
   <div class="svgbox">
-  <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg" font-family="Inter,sans-serif" font-size="13">
+  <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg" font-family="Rethink Sans,sans-serif" font-size="13">
     <defs>
-      <marker id="re" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#d64545"/></marker>
-      <marker id="bl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#2f6fe0"/></marker>
+      <marker id="re" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#b4432f"/></marker>
+      <marker id="bl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#2f5f8a"/></marker>
     </defs>
-    <rect x="40" y="110" width="130" height="50" rx="10" fill="#eef1f5" stroke="#5d6670"/><text x="105" y="140" text-anchor="middle" font-weight="800">SÓLIDO</text>
-    <rect x="255" y="110" width="130" height="50" rx="10" fill="#eef1f5" stroke="#5d6670"/><text x="320" y="140" text-anchor="middle" font-weight="800">LÍQUIDO</text>
-    <rect x="470" y="110" width="130" height="50" rx="10" fill="#eef1f5" stroke="#5d6670"/><text x="535" y="140" text-anchor="middle" font-weight="800">GAS</text>
+    <rect x="40" y="110" width="130" height="50" rx="10" fill="#f7f3ec" stroke="#5a5c53"/><text x="105" y="140" text-anchor="middle" font-weight="800">SÓLIDO</text>
+    <rect x="255" y="110" width="130" height="50" rx="10" fill="#f7f3ec" stroke="#5a5c53"/><text x="320" y="140" text-anchor="middle" font-weight="800">LÍQUIDO</text>
+    <rect x="470" y="110" width="130" height="50" rx="10" fill="#f7f3ec" stroke="#5a5c53"/><text x="535" y="140" text-anchor="middle" font-weight="800">GAS</text>
     <g fill="none" stroke-width="2.2">
-      <path d="M170,115 Q212,78 252,115" stroke="#d64545" marker-end="url(#re)"/>
-      <path d="M385,115 Q427,78 467,115" stroke="#d64545" marker-end="url(#re)"/>
-      <path d="M105,108 Q320,8 535,108" stroke="#d64545" marker-end="url(#re)"/>
-      <path d="M255,155 Q212,192 173,155" stroke="#2f6fe0" marker-end="url(#bl)"/>
-      <path d="M470,155 Q427,192 388,155" stroke="#2f6fe0" marker-end="url(#bl)"/>
-      <path d="M535,162 Q320,262 105,162" stroke="#2f6fe0" marker-end="url(#bl)"/>
+      <path d="M170,115 Q212,78 252,115" stroke="#b4432f" marker-end="url(#re)"/>
+      <path d="M385,115 Q427,78 467,115" stroke="#b4432f" marker-end="url(#re)"/>
+      <path d="M105,108 Q320,8 535,108" stroke="#b4432f" marker-end="url(#re)"/>
+      <path d="M255,155 Q212,192 173,155" stroke="#2f5f8a" marker-end="url(#bl)"/>
+      <path d="M470,155 Q427,192 388,155" stroke="#2f5f8a" marker-end="url(#bl)"/>
+      <path d="M535,162 Q320,262 105,162" stroke="#2f5f8a" marker-end="url(#bl)"/>
     </g>
-    <g font-weight="700"><text x="212" y="88" text-anchor="middle" fill="#d64545">fusión</text><text x="427" y="88" text-anchor="middle" fill="#d64545">vaporización</text><text x="320" y="50" text-anchor="middle" fill="#d64545">sublimación</text>
-    <text x="212" y="196" text-anchor="middle" fill="#2f6fe0">solidificación</text><text x="427" y="196" text-anchor="middle" fill="#2f6fe0">condensación</text><text x="320" y="230" text-anchor="middle" fill="#2f6fe0">deposición</text></g>
-    <text x="10" y="22" fill="#d64545" font-weight="700">→ ENDOtérmico: absorbe calor (ΔH &gt; 0)</text>
-    <text x="10" y="252" fill="#2f6fe0" font-weight="700">← EXOtérmico: libera calor (ΔH &lt; 0)</text>
+    <g font-weight="700"><text x="212" y="88" text-anchor="middle" fill="#b4432f">fusión</text><text x="427" y="88" text-anchor="middle" fill="#b4432f">vaporización</text><text x="320" y="50" text-anchor="middle" fill="#b4432f">sublimación</text>
+    <text x="212" y="196" text-anchor="middle" fill="#2f5f8a">solidificación</text><text x="427" y="196" text-anchor="middle" fill="#2f5f8a">condensación</text><text x="320" y="230" text-anchor="middle" fill="#2f5f8a">deposición</text></g>
+    <text x="10" y="22" fill="#b4432f" font-weight="700">→ ENDOtérmico: absorbe calor (ΔH &gt; 0)</text>
+    <text x="10" y="252" fill="#2f5f8a" font-weight="700">← EXOtérmico: libera calor (ΔH &lt; 0)</text>
   </svg>
   <div class="cap">Hacia el gas (más desorden) siempre hay que dar calor. Hacia el sólido, se libera.</div>
   </div>
 
-  <h3>✍️ Ejercicio tipo parcial</h3>
+  <h3>Ejercicio tipo parcial</h3>
   <div class="ex"><span class="pts">Simulacro 2º parcial · Tema 1 · Ej. 1 (1 punto)</span>
     <p class="q">Líquido P: viscosidad alta, presión de vapor baja, punto de ebullición alto. Líquido Q: viscosidad baja, presión de vapor alta, punto de ebullición bajo. a) ¿Cuál tiene fuerzas intermoleculares más intensas? b) ¿Cuál se evapora más rápido en un recipiente abierto?</p>
     <details class="sol"><summary>Ver resolución</summary>
@@ -295,7 +405,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
 
 <!-- ===================== SÓLIDOS ===================== -->
 <section class="topic" id="solidos">
-  <h2>Sólidos <span class="tag p2">2º parcial</span></h2>
+  <h2>Sólidos <span class="tag">2º parcial</span></h2>
   <p class="lead">Lo que más se toma: elegir un material según sus propiedades. Para eso alcanza con saber los 4 tipos de cristal y cómo conducen.</p>
 
   <div class="grid2">
@@ -320,7 +430,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
   </div>
   <div class="box concept"><span class="ttl">Semiconductores dopados (extrínsecos)</span><b>Tipo N</b>: se agrega un elemento con un electrón de más (P, As) → sobran electrones (−). <b>Tipo P</b>: se agrega uno con un electrón de menos (B, Ga) → quedan «huecos» (+). Sin dopar se llaman <b>intrínsecos</b>.</div>
 
-  <h3>✍️ Ejercicio tipo parcial: elegir material</h3>
+  <h3>Ejercicio tipo parcial: elegir material</h3>
   <div class="ex"><span class="pts">Simulacro 2º parcial · Temas 1 y 2 (1 punto)</span>
     <p class="q">Hay aluminio, germanio, carburo de silicio y bromuro de potasio. Elegí para: a) herramienta abrasiva de corte; b) componente semiconductor; c) sensor electrónico de temperatura; d) aislante eléctrico en estado sólido.</p>
     <details class="sol"><summary>Ver resolución</summary>
@@ -346,7 +456,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
 
 <!-- ===================== GASES ===================== -->
 <section class="topic" id="gases">
-  <h2>Gases <span class="tag p2">2º parcial</span></h2>
+  <h2>Gases <span class="tag">2º parcial</span></h2>
   <p class="lead">Una sola ecuación resuelve casi todo: PV = nRT. Las «leyes» de Boyle, Charles y Avogadro son casos particulares.</p>
 
   <div class="box formula"><span class="ttl">La ecuación</span>
@@ -367,7 +477,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
   </div>
   <div class="box concept"><span class="ttl">Gas ideal (teoría cinético-molecular)</span>Las moléculas no se atraen ni se repelen, su volumen es despreciable frente al del recipiente y chocan de forma elástica. La energía cinética media depende solo de T.</div>
 
-  <h3>✍️ Ejercicio tipo parcial: combustión + mezcla</h3>
+  <h3>Ejercicio tipo parcial: combustión + mezcla</h3>
   <div class="how"><span class="ttl">✅ Receta</span>
     <ol class="steps">
       <li><b>Balancear</b> la combustión: CₓHᵧ + O₂ → x CO₂ + (y/2) H₂O. (Primero C, después H, último O.)</li>
@@ -398,12 +508,12 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
 
 <!-- ===================== SOLUCIONES ===================== -->
 <section class="topic" id="soluciones">
-  <h2>Soluciones <span class="tag p2">2º parcial</span></h2>
+  <h2>Soluciones <span class="tag">2º parcial</span></h2>
   <p class="lead">Vale 2,5 puntos y es puro método. Si armás la tabla de abajo, el ejercicio sale solo.</p>
 
   <div class="flow"><div class="st">SOLUTO<small>lo que disolvés (menor cantidad)</small></div><div class="ar">+</div><div class="st">SOLVENTE<small>casi siempre agua</small></div><div class="ar">=</div><div class="st" style="border-color:var(--ok)">SOLUCIÓN<small>la mezcla homogénea</small></div></div>
 
-  <h3>🧮 La tabla mágica (armala SIEMPRE)</h3>
+  <h3>La tabla mágica (armala SIEMPRE)</h3>
   <div class="tbl-wrap"><table>
     <tr><th></th><th>Soluto</th><th>Solvente</th><th>Solución</th></tr>
     <tr><td><b>masa (g)</b></td><td>dato</td><td>= solución − soluto</td><td>= soluto + solvente &nbsp;o&nbsp; = densidad × volumen</td></tr>
@@ -438,7 +548,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
   <div class="box concept"><span class="ttl">Ejemplo de la ley de Henry</span>Las bebidas gaseosas se envasan con CO₂ a alta presión. Al abrir la botella la presión baja, el gas se vuelve menos soluble y salen las burbujas.</div>
   <div class="box concept"><span class="ttl">Insaturada · saturada · sobresaturada</span>Insaturada: se puede disolver más. Saturada: tiene la máxima cantidad posible (= solubilidad) a esa T. Sobresaturada: tiene más de lo que admite; es inestable y cristaliza con cualquier perturbación.</div>
 
-  <h3>✍️ Ejercicios tipo parcial</h3>
+  <h3>Ejercicios tipo parcial</h3>
   <div class="ex"><span class="pts">Simulacro 2º parcial · Tema 1 · Ej. 5 (2,5 puntos)</span>
     <p class="q">400 mL de solución con 20,0 g de lactosa (M = 342,30 g/mol). Densidad 1,03 g/mL. a) % p/p y molalidad. b) Se toman 25,0 mL y se diluyen hasta 250 mL: molaridad final.</p>
     <details class="sol"><summary>Ver resolución con la tabla</summary>
@@ -471,7 +581,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
 
 <!-- ===================== TERMO ===================== -->
 <section class="topic" id="termo">
-  <h2>Termoquímica y Ley de Hess <span class="tag p2">2º parcial</span></h2>
+  <h2>Termoquímica y Ley de Hess <span class="tag">2º parcial</span></h2>
   <p class="lead">El ejercicio de Hess vale 2,5 puntos y siempre tiene la misma forma. Practicalo hasta que te salga de memoria.</p>
 
   <h3>Sistemas</h3>
@@ -484,8 +594,8 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
 
   <h3>Entalpía (ΔH)</h3>
   <div class="grid2">
-    <div class="box concept" style="border-left:5px solid var(--exo)"><span class="ttl">ΔH &lt; 0 → EXOtérmica</span>El sistema <b>libera</b> calor al entorno. Los productos tienen menos energía. Ej.: combustiones.</div>
-    <div class="box concept" style="border-left:5px solid var(--endo)"><span class="ttl">ΔH &gt; 0 → ENDOtérmica</span>El sistema <b>absorbe</b> calor del entorno. Ej.: fundir hielo, formar etileno.</div>
+    <div class="box concept"><span class="ttl">ΔH &lt; 0 → EXOtérmica</span>El sistema <b>libera</b> calor al entorno. Los productos tienen menos energía. Ej.: combustiones.</div>
+    <div class="box concept"><span class="ttl">ΔH &gt; 0 → ENDOtérmica</span>El sistema <b>absorbe</b> calor del entorno. Ej.: fundir hielo, formar etileno.</div>
   </div>
   <div class="box formula"><span class="ttl">Fórmulas</span>
     <span class="f">ΔH°r = Σ n·ΔH°f(productos) − Σ n·ΔH°f(reactivos)</span><br>
@@ -506,7 +616,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
   </div>
   <div class="flow"><div class="st">ecuación dada</div><div class="ar">→</div><div class="st">¿invierto? <small>ΔH × (−1)</small></div><div class="ar">→</div><div class="st">¿multiplico? <small>ΔH × n</small></div><div class="ar">→</div><div class="st" style="border-color:var(--ok)">sumo todo <small>ΔH total</small></div></div>
 
-  <h3>✍️ Ejercicio tipo parcial</h3>
+  <h3>Ejercicio tipo parcial</h3>
   <div class="ex"><span class="pts">Simulacro 2º parcial · Tema 1 · Ej. 2 (2,5 puntos)</span>
     <p class="q">i) C(grafito) + O₂ → CO₂ &nbsp;ΔH = −393,5 kJ · ii) H₂ + ½ O₂ → H₂O(l) &nbsp;ΔH = −285,8 kJ · iii) 2 C₂H₄ + 6 O₂ → 4 CO₂ + 4 H₂O(l) &nbsp;ΔH = −2822,0 kJ.<br>a) Reacción de formación del etileno. b) ΔH°f por Hess. c) ¿Endo o exo? d) Calor para formar 56,0 g de C₂H₄.</p>
     <details class="sol"><summary>Ver resolución paso a paso</summary>
@@ -534,7 +644,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
 
 <!-- ===================== ESPONTANEIDAD ===================== -->
 <section class="topic" id="espontaneidad">
-  <h2>Entropía y espontaneidad <span class="tag p2">2º parcial</span></h2>
+  <h2>Entropía y espontaneidad <span class="tag">2º parcial</span></h2>
   <p class="lead">Que una reacción libere calor no alcanza para que ocurra sola. Hay que mirar también el desorden. Las dos cosas juntas se combinan en ΔG.</p>
 
   <div class="box concept"><span class="ttl">Entropía (S) = desorden</span>
@@ -557,7 +667,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
   </table>
   <div class="box concept"><span class="ttl">2ª ley y 3ª ley</span>2ª: en todo proceso espontáneo la entropía del <b>universo</b> aumenta (ΔS<sub>univ</sub> = ΔS<sub>sist</sub> + ΔS<sub>entorno</sub> &gt; 0). 3ª: la entropía de un cristal perfecto a 0 K es cero.</div>
 
-  <h3>✍️ Ejercicio tipo parcial</h3>
+  <h3>Ejercicio tipo parcial</h3>
   <div class="ex"><span class="pts">Recuperatorio 2023 · Ej. 1</span>
     <p class="q">CO + ½ O₂ → CO₂ (catalizado por Pt). Datos: CO: ΔH°f = −110,5 kJ/mol, ΔG°f = −137,3 kJ/mol. CO₂: ΔH°f = −393,5, ΔG°f = −394,4. a) ¿Endo o exo? b) ¿Espontánea a 25 °C? c) ΔS°: ¿aumenta o disminuye la entropía?</p>
     <details class="sol"><summary>Ver resolución</summary>
@@ -570,43 +680,43 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
 
 <!-- ===================== CINÉTICA ===================== -->
 <section class="topic" id="cinetica">
-  <h2>Cinética química <span class="tag p2">2º parcial</span></h2>
+  <h2>Cinética química <span class="tag">2º parcial</span></h2>
   <p class="lead">La termodinámica dice <b>si</b> una reacción puede ocurrir; la cinética dice <b>qué tan rápido</b>. El diamante debería quemarse (ΔG &lt; 0), pero es lentísimo.</p>
 
   <h3>El perfil energético (aprendé a leerlo)</h3>
   <div class="svgbox">
-  <svg viewBox="0 0 760 310" xmlns="http://www.w3.org/2000/svg" font-family="Inter,sans-serif" font-size="12.5">
+  <svg viewBox="0 0 760 310" xmlns="http://www.w3.org/2000/svg" font-family="Rethink Sans,sans-serif" font-size="12.5">
     <defs>
-      <marker id="k1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#1d2329"/></marker>
-      <marker id="k2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#2f6fe0"/></marker>
-      <marker id="k3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#d64545"/></marker>
+      <marker id="k1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#22261f"/></marker>
+      <marker id="k2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#2f5f8a"/></marker>
+      <marker id="k3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#b4432f"/></marker>
     </defs>
     <g>
-      <text x="190" y="18" text-anchor="middle" font-weight="800" fill="#2f6fe0" font-size="14">EXOTÉRMICA (ΔH &lt; 0)</text>
-      <path d="M30,30 L30,270 L355,270" stroke="#1d2329" fill="none" stroke-width="1.5"/>
+      <text x="190" y="18" text-anchor="middle" font-weight="800" fill="#2f5f8a" font-size="14">EXOTÉRMICA (ΔH &lt; 0)</text>
+      <path d="M30,30 L30,270 L355,270" stroke="#22261f" fill="none" stroke-width="1.5"/>
       <text x="12" y="150" transform="rotate(-90 12 150)" text-anchor="middle">Energía</text><text x="195" y="290" text-anchor="middle">Avance de la reacción</text>
-      <path d="M40,160 L90,160 C140,160 160,50 200,50 C245,50 265,220 310,220 L350,220" stroke="#1d2329" stroke-width="2.6" fill="none"/>
-      <path d="M90,160 C140,160 160,112 200,112 C245,112 265,220 310,220" stroke="#7a5af8" stroke-width="2.2" stroke-dasharray="6 5" fill="none"/>
-      <line x1="90" y1="160" x2="345" y2="160" stroke="#9aa1a8" stroke-dasharray="3 4"/>
-      <line x1="200" y1="157" x2="200" y2="55" stroke="#1d2329" stroke-width="1.6" marker-start="url(#k1)" marker-end="url(#k1)"/>
+      <path d="M40,160 L90,160 C140,160 160,50 200,50 C245,50 265,220 310,220 L350,220" stroke="#22261f" stroke-width="2.6" fill="none"/>
+      <path d="M90,160 C140,160 160,112 200,112 C245,112 265,220 310,220" stroke="#2e5b44" stroke-width="2.2" stroke-dasharray="6 5" fill="none"/>
+      <line x1="90" y1="160" x2="345" y2="160" stroke="#a19e96" stroke-dasharray="3 4"/>
+      <line x1="200" y1="157" x2="200" y2="55" stroke="#22261f" stroke-width="1.6" marker-start="url(#k1)" marker-end="url(#k1)"/>
       <text x="206" y="98" font-weight="700">Ea</text>
-      <line x1="330" y1="162" x2="330" y2="217" stroke="#2f6fe0" stroke-width="2" marker-end="url(#k2)"/>
-      <text x="290" y="196" font-weight="700" fill="#2f6fe0">ΔH</text>
-      <text x="200" y="42" text-anchor="middle" fill="#5d6670">complejo activado</text>
+      <line x1="330" y1="162" x2="330" y2="217" stroke="#2f5f8a" stroke-width="2" marker-end="url(#k2)"/>
+      <text x="290" y="196" font-weight="700" fill="#2f5f8a">ΔH</text>
+      <text x="200" y="42" text-anchor="middle" fill="#5a5c53">complejo activado</text>
       <text x="62" y="152" text-anchor="middle" font-weight="700">Reactivos</text>
       <text x="318" y="238" text-anchor="middle" font-weight="700">Productos</text>
-      <text x="258" y="92" fill="#7a5af8" font-weight="700">- - con catalizador</text>
+      <text x="258" y="92" fill="#2e5b44" font-weight="700">- - con catalizador</text>
     </g>
     <g transform="translate(395,0)">
-      <text x="190" y="18" text-anchor="middle" font-weight="800" fill="#d64545" font-size="14">ENDOTÉRMICA (ΔH &gt; 0)</text>
-      <path d="M30,30 L30,270 L355,270" stroke="#1d2329" fill="none" stroke-width="1.5"/>
+      <text x="190" y="18" text-anchor="middle" font-weight="800" fill="#b4432f" font-size="14">ENDOTÉRMICA (ΔH &gt; 0)</text>
+      <path d="M30,30 L30,270 L355,270" stroke="#22261f" fill="none" stroke-width="1.5"/>
       <text x="195" y="290" text-anchor="middle">Avance de la reacción</text>
-      <path d="M40,220 L90,220 C140,220 160,50 200,50 C245,50 265,140 310,140 L350,140" stroke="#1d2329" stroke-width="2.6" fill="none"/>
-      <line x1="90" y1="220" x2="345" y2="220" stroke="#9aa1a8" stroke-dasharray="3 4"/>
-      <line x1="200" y1="217" x2="200" y2="55" stroke="#1d2329" stroke-width="1.6" marker-start="url(#k1)" marker-end="url(#k1)"/>
+      <path d="M40,220 L90,220 C140,220 160,50 200,50 C245,50 265,140 310,140 L350,140" stroke="#22261f" stroke-width="2.6" fill="none"/>
+      <line x1="90" y1="220" x2="345" y2="220" stroke="#a19e96" stroke-dasharray="3 4"/>
+      <line x1="200" y1="217" x2="200" y2="55" stroke="#22261f" stroke-width="1.6" marker-start="url(#k1)" marker-end="url(#k1)"/>
       <text x="206" y="130" font-weight="700">Ea</text>
-      <line x1="330" y1="218" x2="330" y2="144" stroke="#d64545" stroke-width="2" marker-end="url(#k3)"/>
-      <text x="290" y="190" font-weight="700" fill="#d64545">ΔH</text>
+      <line x1="330" y1="218" x2="330" y2="144" stroke="#b4432f" stroke-width="2" marker-end="url(#k3)"/>
+      <text x="290" y="190" font-weight="700" fill="#b4432f">ΔH</text>
       <text x="62" y="212" text-anchor="middle" font-weight="700">Reactivos</text>
       <text x="318" y="132" text-anchor="middle" font-weight="700">Productos</text>
     </g>
@@ -634,7 +744,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
     <span class="f">v = −(1/a)·Δ[A]/Δt = (1/c)·Δ[C]/Δt</span> (los reactivos desaparecen: signo −)</div>
   <div class="how"><span class="ttl">✅ Sacar el orden de una tabla</span>Buscá dos experimentos donde cambie <b>una sola</b> concentración. Si [A] se duplica y v se duplica → orden 1. Si v se cuadruplica → orden 2. Si v no cambia → orden 0. Después reemplazás en un experimento y despejás k. Unidades de k: orden 0 → M/s; orden 1 → 1/s; orden 2 → 1/(M·s).</div>
 
-  <h3>✍️ Ejercicios tipo parcial</h3>
+  <h3>Ejercicios tipo parcial</h3>
   <div class="ex"><span class="pts">Simulacro 2º parcial · Tema 1 · Ej. 3 y Tema 2 · Ej. 5</span>
     <p class="q">Gráfico: reactivos a 320 kJ, productos a 260 kJ. Pico de A = 425 kJ, pico de B = 375 kJ. a) ¿Cuál es más rápida? b) ΔH y carácter térmico. c) Dos formas de acelerar la más lenta. d) Ea de cada una.</p>
     <details class="sol"><summary>Ver resolución</summary>
@@ -654,7 +764,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
 
 <!-- ===================== EQUILIBRIO ===================== -->
 <section class="topic" id="equilibrio">
-  <h2>Equilibrio químico <span class="tag p3">3º parcial</span></h2>
+  <h2>Equilibrio químico <span class="tag t3">3º parcial</span></h2>
   <p class="lead">En el equilibrio la reacción no se detiene: la directa y la inversa ocurren a la <b>misma velocidad</b>, por eso las concentraciones quedan constantes (equilibrio dinámico).</p>
 
   <h3>Escribir Kc</h3>
@@ -673,9 +783,9 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
   <h3>Q vs K: ¿hacia dónde va la reacción?</h3>
   <p>Q se calcula igual que K pero con las concentraciones de <b>ese momento</b> (no necesariamente de equilibrio).</p>
   <div class="grid3">
-    <div class="card" style="border-top:5px solid var(--ok)"><h4>Q &lt; K</h4>Faltan productos → avanza <b>hacia la derecha →</b> (productos)</div>
+    <div class="card"><h4>Q &lt; K</h4>Faltan productos → avanza <b>hacia la derecha →</b> (productos)</div>
     <div class="card" style="border-top:5px solid #888"><h4>Q = K</h4>Está en <b>equilibrio</b>. Velocidad directa = velocidad inversa.</div>
-    <div class="card" style="border-top:5px solid var(--warn)"><h4>Q &gt; K</h4>Sobran productos → avanza <b>← hacia la izquierda</b> (reactivos)</div>
+    <div class="card"><h4>Q &gt; K</h4>Sobran productos → avanza <b>← hacia la izquierda</b> (reactivos)</div>
   </div>
 
   <h3>Principio de Le Chatelier</h3>
@@ -693,8 +803,8 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
   </table></div>
   <div class="box tip"><span class="ttl">💡 Truco para la temperatura</span>Escribí el calor dentro de la ecuación. Endo: <b>calor</b> + A ⇄ B. Exo: A ⇄ B + <b>calor</b>. Si subís T es como agregar «calor»: el equilibrio se aleja de ese lado.</div>
 
-  <h3>✍️ Ejercicio tipo parcial</h3>
-  <div class="ex o"><span class="pts">Simulacro 3º parcial · Ej. 1 (1,5 puntos)</span>
+  <h3>Ejercicio tipo parcial</h3>
+  <div class="ex"><span class="pts">Simulacro 3º parcial · Ej. 1 (1,5 puntos)</span>
     <p class="q">N₂O₄(g) ⇄ 2 NO₂(g); Kc = 0,64 y [N₂O₄]eq = 0,25 M. a) Expresión de Kc. b) [NO₂] en el equilibrio. c) ¿Qué pasa si se disminuye el volumen a T constante?</p>
     <details class="sol"><summary>Ver resolución</summary>
       <p><b>a)</b> Kc = [NO₂]² / [N₂O₄]</p>
@@ -702,7 +812,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
       <p><b>c)</b> Al bajar el volumen sube la presión. El sistema se desplaza hacia el lado con <b>menos moles de gas</b>: izquierda (1 mol de N₂O₄ frente a 2 de NO₂). <span class="ans">Se forma N₂O₄</span>. Kc no cambia porque T es constante.</p>
     </details>
   </div>
-  <div class="ex o"><span class="pts">Simulacro 3º parcial · Ej. 2 (1 punto)</span>
+  <div class="ex"><span class="pts">Simulacro 3º parcial · Ej. 2 (1 punto)</span>
     <p class="q">Kc = 4,5 × 10⁻². a) ¿Qué se infiere? b) ¿Un catalizador cambia Kc? c) ¿Qué informa comparar Qc y Kc?</p>
     <details class="sol"><summary>Ver resolución</summary>
       <p><b>a)</b> Kc &lt; 1 → en el equilibrio predominan los <span class="ans">reactivos</span> (la reacción avanza poco).</p>
@@ -714,7 +824,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
 
 <!-- ===================== pH ===================== -->
 <section class="topic" id="ph">
-  <h2>Ácidos, bases y pH <span class="tag p3">3º parcial</span></h2>
+  <h2>Ácidos, bases y pH <span class="tag t3">3º parcial</span></h2>
   <p class="lead">1,5 puntos con dos fórmulas y la calculadora. Lo único conceptual: la escala es logarítmica.</p>
 
   <div class="grid2">
@@ -730,12 +840,12 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
   <div class="box formula"><span class="ttl">Las 4 fórmulas</span>
     <span class="f">pH = −log [H⁺]</span> <span class="f">pOH = −log [OH⁻]</span> <span class="f">pH + pOH = 14</span> <span class="f">[H⁺]·[OH⁻] = 10⁻¹⁴</span><br>
     Y para volver: <span class="f">[H⁺] = 10<sup>−pH</sup></span>. &nbsp;pH &lt; 7 ácida · pH = 7 neutra · pH &gt; 7 básica (a 25 °C)</div>
-  <div class="flow o"><div class="st">te dan [OH⁻]</div><div class="ar">→</div><div class="st">pOH = −log[OH⁻]</div><div class="ar">→</div><div class="st">pH = 14 − pOH</div></div>
+  <div class="flow"><div class="st">te dan [OH⁻]</div><div class="ar">→</div><div class="st">pOH = −log[OH⁻]</div><div class="ar">→</div><div class="st">pH = 14 − pOH</div></div>
   <div class="box trap"><span class="ttl">⚠ Escala logarítmica</span>1 unidad de pH = <b>10 veces</b> más (o menos) H⁺. pH 3 tiene 10 veces más H⁺ que pH 4. pH 2 tiene <b>100</b> veces más que pH 4 (10⁻²/10⁻⁴ = 10²).</div>
   <div class="box tip"><span class="ttl">💡 Ácidos o bases fuertes con varios H u OH</span>Ba(OH)₂ 0,018 M libera 2 OH⁻ por fórmula → [OH⁻] = 2 × 0,018 = 0,036 M → pOH = 1,44 → pH = 12,56.</div>
 
-  <h3>✍️ Ejercicio tipo parcial</h3>
-  <div class="ex o"><span class="pts">Simulacro 3º parcial · Ej. 3 (1,5 puntos)</span>
+  <h3>Ejercicio tipo parcial</h3>
+  <div class="ex"><span class="pts">Simulacro 3º parcial · Ej. 3 (1,5 puntos)</span>
     <p class="q">A: [H⁺] = 4,0 × 10⁻³ M · B: [OH⁻] = 2,0 × 10⁻⁵ M · C: pH = 7,0. a) pH de A y B. b) Ordenar de mayor a menor acidez. c) ¿Una solución de pH 3 es diez veces más ácida que una de pH 4?</p>
     <details class="sol"><summary>Ver resolución</summary>
       <p><b>a)</b> pH(A) = −log(4,0 × 10⁻³) = <span class="ans">2,40</span> · pOH(B) = −log(2,0 × 10⁻⁵) = 4,70 → pH(B) = 14 − 4,70 = <span class="ans">9,30</span></p>
@@ -748,7 +858,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
 
 <!-- ===================== KPS ===================== -->
 <section class="topic" id="kps">
-  <h2>Solubilidad y Kps <span class="tag p3">3º parcial</span></h2>
+  <h2>Solubilidad y Kps <span class="tag t3">3º parcial</span></h2>
   <p class="lead">Es un equilibrio entre un sólido poco soluble y sus iones disueltos. En los simulacros aparece sobre todo en los V o F (Q vs Kps).</p>
 
   <div class="box formula">AgCl(s) ⇄ Ag⁺(ac) + Cl⁻(ac) → <span class="f">Kps = [Ag⁺]·[Cl⁻]</span> (el sólido no se escribe)<br>
@@ -763,16 +873,16 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
 
   <h3>Q vs Kps: ¿precipita?</h3>
   <div class="grid3">
-    <div class="card" style="border-top:5px solid var(--ok)"><h4>Q &lt; Kps</h4><b>Insaturada.</b> No precipita; se puede disolver más sólido.</div>
+    <div class="card"><h4>Q &lt; Kps</h4><b>Insaturada.</b> No precipita; se puede disolver más sólido.</div>
     <div class="card" style="border-top:5px solid #888"><h4>Q = Kps</h4><b>Saturada.</b> En equilibrio.</div>
-    <div class="card" style="border-top:5px solid var(--warn)"><h4>Q &gt; Kps</h4><b>Sobresaturada → PRECIPITA</b> hasta que Q = Kps.</div>
+    <div class="card"><h4>Q &gt; Kps</h4><b>Sobresaturada → PRECIPITA</b> hasta que Q = Kps.</div>
   </div>
   <div class="box concept"><span class="ttl">Efecto del ion común</span>Si agregás un ion que ya está en el equilibrio (por ejemplo, NaCl a una solución de AgCl), el equilibrio se desplaza hacia el sólido: <b>baja la solubilidad</b>. Es Le Chatelier.</div>
 </section>
 
 <!-- ===================== REDOX ===================== -->
 <section class="topic" id="redox">
-  <h2>Redox y ion-electrón <span class="tag p3">3º parcial</span></h2>
+  <h2>Redox y ion-electrón <span class="tag t3">3º parcial</span></h2>
   <p class="lead">El ejercicio más largo (2 puntos), pero es siempre el mismo procedimiento. Si lo practicás 3 veces, sale.</p>
 
   <h3>La tabla que no se olvida</h3>
@@ -809,8 +919,8 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
     </ol>
   </div>
 
-  <h3>✍️ Ejercicio tipo parcial</h3>
-  <div class="ex o"><span class="pts">Simulacro 3º parcial · Ej. 5 (2 puntos)</span>
+  <h3>Ejercicio tipo parcial</h3>
+  <div class="ex"><span class="pts">Simulacro 3º parcial · Ej. 5 (2 puntos)</span>
     <p class="q">K₂Cr₂O₇ + HCl → CrCl₃ + Cl₂ + KCl + H₂O. Se usan 14,7 g de K₂Cr₂O₇ (M = 294 g/mol). a) Números de oxidación que cambian. b) Qué se oxida y qué se reduce. c) Balancear por ion-electrón. d) Oxidante y reductor. e) Masa de Cl₂.</p>
     <details class="sol"><summary>Ver resolución paso a paso</summary>
       <p><b>a)</b> Cr: <b>+6</b> (en K₂Cr₂O₇) → <b>+3</b> (en CrCl₃). Cl: <b>−1</b> (en HCl) → <b>0</b> (en Cl₂). K, H y O no cambian.</p>
@@ -836,31 +946,31 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
 
 <!-- ===================== PILAS ===================== -->
 <section class="topic" id="pilas">
-  <h2>Pilas (celdas galvánicas) y electrólisis <span class="tag p3">3º parcial</span></h2>
+  <h2>Pilas (celdas galvánicas) y electrólisis <span class="tag t3">3º parcial</span></h2>
   <p class="lead">Una pila aprovecha una reacción redox espontánea para generar corriente: separás la oxidación y la reducción y obligás a los electrones a pasar por un cable.</p>
 
   <div class="svgbox">
-  <svg viewBox="0 0 640 345" xmlns="http://www.w3.org/2000/svg" font-family="Inter,sans-serif" font-size="13">
-    <defs><marker id="e1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#b42318"/></marker></defs>
-    <path d="M142,90 L142,40 L293,40 M337,40 L488,40 L488,90" stroke="#1d2329" stroke-width="2.5" fill="none"/>
-    <circle cx="315" cy="40" r="22" fill="#fff" stroke="#1d2329" stroke-width="2.5"/><text x="315" y="45" text-anchor="middle" font-weight="800">V</text>
-    <line x1="185" y1="26" x2="255" y2="26" stroke="#b42318" stroke-width="2.5" marker-end="url(#e1)"/><text x="220" y="18" text-anchor="middle" fill="#b42318" font-weight="700">e⁻</text>
-    <line x1="375" y1="26" x2="445" y2="26" stroke="#b42318" stroke-width="2.5" marker-end="url(#e1)"/><text x="410" y="18" text-anchor="middle" fill="#b42318" font-weight="700">e⁻</text>
-    <rect x="62" y="180" width="176" height="118" fill="#e9edf2"/>
-    <rect x="402" y="180" width="176" height="118" fill="#cfe3fb"/>
-    <path d="M60,150 L60,300 L240,300 L240,150 M400,150 L400,300 L580,300 L580,150" stroke="#1d2329" stroke-width="2.5" fill="none"/>
-    <path d="M200,215 L200,120 L440,120 L440,215" stroke="#f1e2a6" stroke-width="22" fill="none" stroke-linejoin="round"/>
-    <text x="320" y="112" text-anchor="middle" font-size="12" fill="#5d6670">puente salino (KNO₃): cierra el circuito</text>
-    <rect x="130" y="90" width="24" height="175" fill="#9aa1a8" stroke="#5d6670"/>
-    <rect x="476" y="90" width="24" height="175" fill="#c47a3d" stroke="#8a4f22"/>
-    <text x="72" y="78" font-weight="800" fill="#d64545" text-anchor="middle">Zn · ÁNODO (−)</text>
-    <text x="568" y="78" font-weight="800" fill="#2f6fe0" text-anchor="middle">Cu · CÁTODO (+)</text>
-    <text x="196" y="290" text-anchor="middle" font-size="12" fill="#5d6670">Zn²⁺(ac)</text>
-    <text x="545" y="290" text-anchor="middle" font-size="12" fill="#5d6670">Cu²⁺(ac)</text>
-    <text x="150" y="322" text-anchor="middle" font-weight="700" fill="#d64545">OXIDACIÓN: Zn → Zn²⁺ + 2e⁻</text>
-    <text x="490" y="322" text-anchor="middle" font-weight="700" fill="#2f6fe0">REDUCCIÓN: Cu²⁺ + 2e⁻ → Cu</text>
-    <text x="150" y="340" text-anchor="middle" font-size="12" fill="#5d6670">la lámina de Zn se desgasta</text>
-    <text x="490" y="340" text-anchor="middle" font-size="12" fill="#5d6670">se deposita Cu sobre la lámina</text>
+  <svg viewBox="0 0 640 345" xmlns="http://www.w3.org/2000/svg" font-family="Rethink Sans,sans-serif" font-size="13">
+    <defs><marker id="e1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#9b2c1f"/></marker></defs>
+    <path d="M142,90 L142,40 L293,40 M337,40 L488,40 L488,90" stroke="#22261f" stroke-width="2.5" fill="none"/>
+    <circle cx="315" cy="40" r="22" fill="#fff" stroke="#22261f" stroke-width="2.5"/><text x="315" y="45" text-anchor="middle" font-weight="800">V</text>
+    <line x1="185" y1="26" x2="255" y2="26" stroke="#9b2c1f" stroke-width="2.5" marker-end="url(#e1)"/><text x="220" y="18" text-anchor="middle" fill="#9b2c1f" font-weight="700">e⁻</text>
+    <line x1="375" y1="26" x2="445" y2="26" stroke="#9b2c1f" stroke-width="2.5" marker-end="url(#e1)"/><text x="410" y="18" text-anchor="middle" fill="#9b2c1f" font-weight="700">e⁻</text>
+    <rect x="62" y="180" width="176" height="118" fill="#e2d9cb"/>
+    <rect x="402" y="180" width="176" height="118" fill="#d6e2ea"/>
+    <path d="M60,150 L60,300 L240,300 L240,150 M400,150 L400,300 L580,300 L580,150" stroke="#22261f" stroke-width="2.5" fill="none"/>
+    <path d="M200,215 L200,120 L440,120 L440,215" stroke="#e6d7a8" stroke-width="22" fill="none" stroke-linejoin="round"/>
+    <text x="320" y="112" text-anchor="middle" font-size="12" fill="#5a5c53">puente salino (KNO₃): cierra el circuito</text>
+    <rect x="130" y="90" width="24" height="175" fill="#a19e96" stroke="#5a5c53"/>
+    <rect x="476" y="90" width="24" height="175" fill="#b87333" stroke="#7a4a1f"/>
+    <text x="72" y="78" font-weight="800" fill="#b4432f" text-anchor="middle">Zn · ÁNODO (−)</text>
+    <text x="568" y="78" font-weight="800" fill="#2f5f8a" text-anchor="middle">Cu · CÁTODO (+)</text>
+    <text x="196" y="290" text-anchor="middle" font-size="12" fill="#5a5c53">Zn²⁺(ac)</text>
+    <text x="545" y="290" text-anchor="middle" font-size="12" fill="#5a5c53">Cu²⁺(ac)</text>
+    <text x="150" y="322" text-anchor="middle" font-weight="700" fill="#b4432f">OXIDACIÓN: Zn → Zn²⁺ + 2e⁻</text>
+    <text x="490" y="322" text-anchor="middle" font-weight="700" fill="#2f5f8a">REDUCCIÓN: Cu²⁺ + 2e⁻ → Cu</text>
+    <text x="150" y="340" text-anchor="middle" font-size="12" fill="#5a5c53">la lámina de Zn se desgasta</text>
+    <text x="490" y="340" text-anchor="middle" font-size="12" fill="#5a5c53">se deposita Cu sobre la lámina</text>
   </svg>
   <div class="cap">Los electrones van por el cable del ÁNODO al CÁTODO. Notación: Zn(s) | Zn²⁺(ac) ‖ Cu²⁺(ac) | Cu(s) (ánodo a la izquierda).</div>
   </div>
@@ -874,8 +984,8 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
   </div>
   <div class="box trap"><span class="ttl">⚠ El potencial NO se multiplica</span>Si multiplicás una semirreacción × 2 para igualar electrones, su E° <b>queda igual</b> (es una propiedad intensiva). Ej.: Ag⁺ + e⁻ → Ag (0,80 V) × 2 sigue siendo 0,80 V.</div>
 
-  <h3>✍️ Ejercicio tipo parcial</h3>
-  <div class="ex o"><span class="pts">Simulacro 3º parcial · Ej. 7 (1 punto)</span>
+  <h3>Ejercicio tipo parcial</h3>
+  <div class="ex"><span class="pts">Simulacro 3º parcial · Ej. 7 (1 punto)</span>
     <p class="q">Pila con Zn²⁺/Zn (E° = −0,76 V) y Cu²⁺/Cu (E° = +0,34 V). a) Semirreacciones. b) Ánodo y cátodo. c) E°pila. d) ¿Espontánea?</p>
     <details class="sol"><summary>Ver resolución</summary>
       <p><b>b)</b> El Cu tiene mayor E° → se reduce → <span class="ans">Cu es el cátodo (+)</span>. <span class="ans">Zn es el ánodo (−)</span>.</p>
@@ -902,7 +1012,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
 
 <!-- ===================== CORROSIÓN ===================== -->
 <section class="topic" id="corrosion">
-  <h2>Corrosión y ánodo de sacrificio <span class="tag p3">3º parcial</span></h2>
+  <h2>Corrosión y ánodo de sacrificio <span class="tag t3">3º parcial</span></h2>
   <p class="lead">La corrosión del hierro es una pila «no deseada»: el Fe actúa como ánodo y se oxida. Para protegerlo, hay que darle a la pila otro ánodo que se oxide en su lugar.</p>
 
   <div class="box concept"><span class="ttl">Cómo se oxida el hierro (herrumbre)</span>Zona anódica: <b>Fe → Fe²⁺ + 2 e⁻</b>. Zona catódica (con agua y oxígeno): <b>O₂ + 2 H₂O + 4 e⁻ → 4 OH⁻</b>. Después Fe²⁺ sigue oxidándose a Fe₂O₃·xH₂O (óxido). Hacen falta <b>agua y oxígeno</b>.</div>
@@ -918,8 +1028,8 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
   </div>
   <div class="how"><span class="ttl">✅ La regla</span>Sirve como ánodo de sacrificio todo metal con <b>E° de reducción MENOR (más negativo) que el del hierro (−0,44 V)</b>: se oxida más fácil, entonces se oxida él y le «regala» electrones al hierro, que queda como <b>cátodo</b> y no se corroe. El metal de sacrificio se gasta y hay que reponerlo.</div>
 
-  <h3>✍️ Ejercicio tipo parcial</h3>
-  <div class="ex o"><span class="pts">Simulacro 3º parcial · Ej. 4 (1,5 puntos)</span>
+  <h3>Ejercicio tipo parcial</h3>
+  <div class="ex"><span class="pts">Simulacro 3º parcial · Ej. 4 (1,5 puntos)</span>
     <p class="q">Cañería de hierro enterrada en suelo húmedo. Potenciales: Ag +0,80; Cu +0,34; Fe −0,44; Al −1,66; Mg −2,37. a) ¿Cuál tiene mayor tendencia a oxidarse? b) ¿Cuáles sirven como ánodo de sacrificio? c) Procesos en el ánodo de sacrificio y en el hierro.</p>
     <details class="sol"><summary>Ver resolución</summary>
       <p><b>a)</b> <span class="ans">Mg</span>: tiene el E° de reducción más negativo (−2,37 V), es decir, la menor tendencia a reducirse y la mayor a oxidarse.</p>
@@ -932,7 +1042,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
 
 <!-- ===================== V o F ===================== -->
 <section class="topic" id="vf">
-  <h2>Banco de Verdadero o Falso <span class="tag gen">Repaso final</span></h2>
+  <h2>Banco de Verdadero o Falso <span class="tag">Repaso final</span></h2>
   <p class="lead">Todos los V o F de los simulacros y del recuperatorio 2023, con la justificación corta que tenés que escribir. Tapá la columna del medio y probate.</p>
   <div class="tbl-wrap"><table class="vf">
     <tr><th>Afirmación</th><th>V/F</th><th>Justificación</th></tr>
@@ -965,7 +1075,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
 
 <!-- ===================== FORMULARIO ===================== -->
 <section class="topic formulario" id="formulario">
-  <h2>Formulario de una página <span class="tag gen">Para repasar antes de entrar</span></h2>
+  <h2>Formulario de una página <span class="tag">Para repasar antes de entrar</span></h2>
   <div class="grid2">
     <div class="card"><h4>🔵 Gases</h4><span class="f">PV = nRT</span> <span class="f">R = 0,082</span> <span class="f">T(K) = °C + 273</span><br><span class="f">P₁V₁/T₁ = P₂V₂/T₂</span> <span class="f">x<sub>i</sub> = n<sub>i</sub>/n<sub>T</sub></span> <span class="f">P<sub>i</sub> = x<sub>i</sub>·P<sub>T</sub></span><br><span class="f">CNPT: 1 mol = 22,4 L</span> <span class="f">1 atm = 760 mmHg</span></div>
     <div class="card"><h4>🔵 Soluciones</h4><span class="f">% p/p = g sto / g sc × 100</span> <span class="f">% p/v = g sto / mL sc × 100</span><br><span class="f">M = mol sto / L sc</span> <span class="f">m = mol sto / kg sv</span><br><span class="f">m sc = d × V</span> <span class="f">M₁V₁ = M₂V₂</span> <span class="f">Henry: C = k·P</span></div>
@@ -977,8 +1087,58 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 50px}
     <div class="card"><h4>🟠 Electroquímica</h4><span class="f">E°pila = E°cát − E°án</span> <span class="f">ΔG° = −nFE°</span> <span class="f">F = 96 500</span><br>Mayor E° → cátodo. e⁻: ánodo → cátodo. E° no se multiplica.<br>Sacrificio: E° &lt; −0,44 V (Zn, Al, Mg)<br><span class="f">m = (I·t/F)·(M/n)</span></div>
   </div>
 </section>
-
+</div>
 </main>
-<footer>Guía armada a partir del material de la cátedra (teoría, guía 2026, simulacros y recuperatorio 2023). ¡Éxitos el miércoles! 💪</footer>
+<footer class="foot"><div class="wrap">Guía armada a partir del material de la cátedra: teoría, guía 2026, simulacros y recuperatorio 2023.</div></footer>
+<script>
+(function(){
+  var mega=document.getElementById('mega'), mbtn=document.getElementById('mbtn'), sbtn=document.getElementById('sbtn');
+  var hoverT=null, wide=function(){return window.matchMedia('(min-width:1001px)').matches;};
+  function setOpen(o){
+    mega.hidden=!o;
+    [mbtn,sbtn].forEach(function(b){b.setAttribute('aria-expanded',o?'true':'false');});
+    document.body.style.overflow=(o&&!wide())?'hidden':'';
+  }
+  mbtn.addEventListener('click',function(){setOpen(mega.hidden);});
+  sbtn.addEventListener('click',function(){setOpen(mega.hidden);});
+  mbtn.addEventListener('mouseenter',function(){if(!wide())return;clearTimeout(hoverT);hoverT=setTimeout(function(){setOpen(true);},150);});
+  mbtn.addEventListener('mouseleave',function(){clearTimeout(hoverT);});
+  document.querySelector('header.nav').addEventListener('mouseleave',function(){if(wide()){clearTimeout(hoverT);hoverT=setTimeout(function(){setOpen(false);},200);}});
+  mega.addEventListener('mouseenter',function(){clearTimeout(hoverT);});
+  mega.addEventListener('click',function(e){if(e.target.closest('a'))setOpen(false);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')setOpen(false);});
+  document.addEventListener('click',function(e){if(!mega.hidden&&!e.target.closest('header.nav'))setOpen(false);});
+
+  // order of sections for prev/next and the "you are here" label
+  var order=[].slice.call(document.querySelectorAll('.mp-col a')).map(function(a){
+    var n=a.querySelector('.n').textContent.trim();
+    return {id:a.dataset.id,name:a.querySelector('span:last-child').textContent,n:n};
+  });
+  var seq=['inicio'].concat(order.filter(function(o){return /^\d+$/.test(o.n);}).map(function(o){return o.id;})).concat(['vf','formulario']);
+  var byId={}; order.forEach(function(o){byId[o.id]=o;});
+  seq.forEach(function(id,i){
+    var s=document.getElementById(id); if(!s)return;
+    var d=document.createElement('div'); d.className='pn';
+    if(i>0){var p=byId[seq[i-1]];var a=document.createElement('a');a.href='#'+p.id;a.innerHTML='<small>← Anterior</small><span>'+p.name+'</span>';d.appendChild(a);}
+    if(i<seq.length-1){var q=byId[seq[i+1]];var b=document.createElement('a');b.className='nx';b.href='#'+q.id;b.innerHTML='<small>Siguiente →</small><span>'+q.name+'</span>';d.appendChild(b);}
+    s.appendChild(d);
+  });
+
+  // where am I
+  var here=document.getElementById('here'), secs=seq.map(function(id){return document.getElementById(id);}).filter(Boolean), cur=null;
+  function spy(){
+    var best=null, lim=window.innerHeight*0.35;
+    secs.forEach(function(s){if(s.getBoundingClientRect().top<=lim)best=s;});
+    var id=best?best.id:null; if(id===cur)return; cur=id;
+    document.querySelectorAll('.mp-col a,.links a').forEach(function(a){
+      if(a.dataset.id===id)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');
+    });
+    var o=id&&byId[id];
+    here.textContent=o?('· '+(/^\d+$/.test(o.n)?'Tema '+o.n+': ':'')+o.name):'';
+  }
+  window.addEventListener('scroll',spy,{passive:true}); spy();
+})();
+
+</script>
 </body>
 </html>
